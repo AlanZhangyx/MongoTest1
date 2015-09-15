@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dzn.teamjava.dao.PhotoStatisticMapper" >
+  <resultMap id="BaseResultMap" type="dzn.teamjava.model.PhotoStatistic" >
+    <id column="xx_photos_statistics_id" property="xxPhotosStatisticsId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="photos_num" property="photosNum" jdbcType="BIGINT" />
+    <result column="first_time" property="firstTime" jdbcType="TIMESTAMP" />
+    <result column="latest_time" property="latestTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    xx_photos_statistics_id, user_id, photos_num, first_time, latest_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from xx_photos_statistics
+    where xx_photos_statistics_id = #{xxPhotosStatisticsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from xx_photos_statistics
+    where xx_photos_statistics_id = #{xxPhotosStatisticsId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="dzn.teamjava.model.PhotoStatistic" >
+    insert into xx_photos_statistics (xx_photos_statistics_id, user_id, photos_num, 
+      first_time, latest_time)
+    values (#{xxPhotosStatisticsId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{photosNum,jdbcType=BIGINT}, 
+      #{firstTime,jdbcType=TIMESTAMP}, #{latestTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="dzn.teamjava.model.PhotoStatistic" >
+    insert into xx_photos_statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="xxPhotosStatisticsId != null" >
+        xx_photos_statistics_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="photosNum != null" >
+        photos_num,
+      </if>
+      <if test="firstTime != null" >
+        first_time,
+      </if>
+      <if test="latestTime != null" >
+        latest_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="xxPhotosStatisticsId != null" >
+        #{xxPhotosStatisticsId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="photosNum != null" >
+        #{photosNum,jdbcType=BIGINT},
+      </if>
+      <if test="firstTime != null" >
+        #{firstTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="latestTime != null" >
+        #{latestTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="dzn.teamjava.model.PhotoStatistic" >
+    update xx_photos_statistics
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="photosNum != null" >
+        photos_num = #{photosNum,jdbcType=BIGINT},
+      </if>
+      <if test="firstTime != null" >
+        first_time = #{firstTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="latestTime != null" >
+        latest_time = #{latestTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where xx_photos_statistics_id = #{xxPhotosStatisticsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="dzn.teamjava.model.PhotoStatistic" >
+    update xx_photos_statistics
+    set user_id = #{userId,jdbcType=BIGINT},
+      photos_num = #{photosNum,jdbcType=BIGINT},
+      first_time = #{firstTime,jdbcType=TIMESTAMP},
+      latest_time = #{latestTime,jdbcType=TIMESTAMP}
+    where xx_photos_statistics_id = #{xxPhotosStatisticsId,jdbcType=BIGINT}
+  </update>
+</mapper>

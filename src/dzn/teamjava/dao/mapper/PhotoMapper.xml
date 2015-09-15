@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dzn.teamjava.dao.PhotoMapper">
+
+	<resultMap id="BaseResultMap" type="dzn.teamjava.model.Photo">
+		<id column="photo_id" property="photoId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="img_res_group" property="imgResGroup" jdbcType="VARCHAR" />
+		<result column="img_res_file" property="imgResFile" jdbcType="VARCHAR" />
+		<result column="img_thumb_00_group" property="imgThumb00Group"
+			jdbcType="VARCHAR" />
+		<result column="img_thumb_00_file" property="imgThumb00File"
+			jdbcType="VARCHAR" />
+		<result column="img_thumb_01_group" property="imgThumb01Group"
+			jdbcType="VARCHAR" />
+		<result column="img_thumb_01_file" property="imgThumb01File"
+			jdbcType="VARCHAR" />
+		<result column="img_thumb_02_group" property="imgThumb02Group"
+			jdbcType="VARCHAR" />
+		<result column="img_thumb_02_file" property="imgThumb02File"
+			jdbcType="VARCHAR" />
+		<result column="geo_num" property="geoNum" jdbcType="BIGINT" />
+		<result column="geo_level" property="geoLevel" jdbcType="SMALLINT" />
+		<result column="iwcode" property="iwcode" jdbcType="VARCHAR" />
+		<result column="lng" property="lng" jdbcType="REAL" />
+		<result column="lat" property="lat" jdbcType="REAL" />
+		<result column="ex_photo_time" property="exPhotoTime" jdbcType="TIMESTAMP" />
+		<result column="ex_country" property="exCountry" jdbcType="VARCHAR" />
+		<result column="ex_province" property="exProvince" jdbcType="VARCHAR" />
+		<result column="ex_city" property="exCity" jdbcType="VARCHAR" />
+		<result column="ex_district" property="exDistrict" jdbcType="VARCHAR" />
+		<result column="ex_address" property="exAddress" jdbcType="VARCHAR" />
+		<result column="exif" property="exif" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="praise_num" property="praiseNum" jdbcType="INTEGER" />
+		<result column="comment_num" property="commentNum" jdbcType="INTEGER" />
+		<result column="del_flag" property="delFlag" jdbcType="BIT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<resultMap id="BaseResultMap2" type="dzn.teamjava.model.Photo">
+        <id column="photo_id" property="photoId" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="img_res_group" property="imgResGroup" jdbcType="VARCHAR" />
+        <result column="img_res_file" property="imgResFile" jdbcType="VARCHAR" />
+        <result column="img_thumb_00_group" property="imgThumb00Group"
+            jdbcType="VARCHAR" />
+        <result column="img_thumb_00_file" property="imgThumb00File"
+            jdbcType="VARCHAR" />
+        <result column="img_thumb_01_group" property="imgThumb01Group"
+            jdbcType="VARCHAR" />
+        <result column="img_thumb_01_file" property="imgThumb01File"
+            jdbcType="VARCHAR" />
+        <result column="img_thumb_02_group" property="imgThumb02Group"
+            jdbcType="VARCHAR" />
+        <result column="img_thumb_02_file" property="imgThumb02File"
+            jdbcType="VARCHAR" />
+        <result column="geo_num" property="geoNum" jdbcType="BIGINT" />
+        <result column="geo_level" property="geoLevel" jdbcType="SMALLINT" />
+        <result column="iwcode" property="iwcode" jdbcType="VARCHAR" />
+        <result column="lng" property="lng" jdbcType="REAL" />
+        <result column="lat" property="lat" jdbcType="REAL" />
+        <result column="ex_photo_time" property="exPhotoTime" jdbcType="TIMESTAMP" />
+        <result column="ex_country" property="exCountry" jdbcType="VARCHAR" />
+        <result column="ex_province" property="exProvince" jdbcType="VARCHAR" />
+        <result column="ex_city" property="exCity" jdbcType="VARCHAR" />
+        <result column="ex_district" property="exDistrict" jdbcType="VARCHAR" />
+        <result column="ex_address" property="exAddress" jdbcType="VARCHAR" />
+        <result column="exif" property="exif" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="praise_num" property="praiseNum" jdbcType="INTEGER" />
+        <result column="comment_num" property="commentNum" jdbcType="INTEGER" />
+        <result column="del_flag" property="delFlag" jdbcType="BIT" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <collection property="shareIds" ofType="long" >
+            <id property="id" column="id"/>
+        </collection>
+        <collection property="tagIds" ofType="long" >
+            <id property="id" column="id"/>
+        </collection>
+        
+    </resultMap>
+	
+	
+	<sql id="Base_Column_List">
+		photo_id, user_id, img_res_group, img_res_file, img_thumb_00_group,
+		img_thumb_00_file,
+		img_thumb_01_group, img_thumb_01_file, img_thumb_02_group, img_thumb_02_file, geo_num,
+		geo_level, iwcode, lng, lat, ex_photo_time, ex_country, ex_province,
+		ex_city, ex_district,
+		ex_address, exif, remark, praise_num, comment_num, del_flag, create_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from xx_photos
+		where photo_id = #{photoId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from xx_photos
+		where photo_id = #{photoId,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="dzn.teamjava.model.Photo">
+		insert into xx_photos (photo_id, user_id, img_res_group,
+		img_res_file, img_thumb_00_group, img_thumb_00_file,
+		img_thumb_01_group, img_thumb_01_file, img_thumb_02_group,
+		img_thumb_02_file, geo_num, geo_level,
+		iwcode, lng, lat, ex_photo_time,
+		ex_country, ex_province, ex_city,
+		ex_district, ex_address, exif,
+		remark, praise_num, comment_num,
+		del_flag, create_time)
+		values (#{photoId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
+		#{imgResGroup,jdbcType=VARCHAR},
+		#{imgResFile,jdbcType=VARCHAR}, #{imgThumb00Group,jdbcType=VARCHAR},
+		#{imgThumb00File,jdbcType=VARCHAR},
+		#{imgThumb01Group,jdbcType=VARCHAR},
+		#{imgThumb01File,jdbcType=VARCHAR},
+		#{imgThumb02Group,jdbcType=VARCHAR},
+		#{imgThumb02File,jdbcType=VARCHAR}, #{geoNum,jdbcType=BIGINT},
+		#{geoLevel,jdbcType=SMALLINT},
+		#{iwcode,jdbcType=VARCHAR}, #{lng,jdbcType=REAL}, #{lat,jdbcType=REAL},
+		#{exPhotoTime,jdbcType=TIMESTAMP},
+		#{exCountry,jdbcType=VARCHAR}, #{exProvince,jdbcType=VARCHAR}, #{exCity,jdbcType=VARCHAR},
+		#{exDistrict,jdbcType=VARCHAR}, #{exAddress,jdbcType=VARCHAR},
+		#{exif,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}, #{praiseNum,jdbcType=INTEGER}, #{commentNum,jdbcType=INTEGER},
+		#{delFlag,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="dzn.teamjava.model.Photo">
+		insert into xx_photos
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="photoId != null">
+				photo_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="imgResGroup != null">
+				img_res_group,
+			</if>
+			<if test="imgResFile != null">
+				img_res_file,
+			</if>
+			<if test="imgThumb00Group != null">
+				img_thumb_00_group,
+			</if>
+			<if test="imgThumb00File != null">
+				img_thumb_00_file,
+			</if>
+			<if test="imgThumb01Group != null">
+				img_thumb_01_group,
+			</if>
+			<if test="imgThumb01File != null">
+				img_thumb_01_file,
+			</if>
+			<if test="imgThumb02Group != null">
+				img_thumb_02_group,
+			</if>
+			<if test="imgThumb02File != null">
+				img_thumb_02_file,
+			</if>
+			<if test="geoNum != null">
+				geo_num,
+			</if>
+			<if test="geoLevel != null">
+				geo_level,
+			</if>
+			<if test="iwcode != null">
+				iwcode,
+			</if>
+			<if test="lng != null">
+				lng,
+			</if>
+			<if test="lat != null">
+				lat,
+			</if>
+			<if test="exPhotoTime != null">
+				ex_photo_time,
+			</if>
+			<if test="exCountry != null">
+				ex_country,
+			</if>
+			<if test="exProvince != null">
+				ex_province,
+			</if>
+			<if test="exCity != null">
+				ex_city,
+			</if>
+			<if test="exDistrict != null">
+				ex_district,
+			</if>
+			<if test="exAddress != null">
+				ex_address,
+			</if>
+			<if test="exif != null">
+				exif,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="praiseNum != null">
+				praise_num,
+			</if>
+			<if test="commentNum != null">
+				comment_num,
+			</if>
+			<if test="delFlag != null">
+				del_flag,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="photoId != null">
+				#{photoId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="imgResGroup != null">
+				#{imgResGroup,jdbcType=VARCHAR},
+			</if>
+			<if test="imgResFile != null">
+				#{imgResFile,jdbcType=VARCHAR},
+			</if>
+			<if test="imgThumb00Group != null">
+				#{imgThumb00Group,jdbcType=VARCHAR},
+			</if>
+			<if test="imgThumb00File != null">
+				#{imgThumb00File,jdbcType=VARCHAR},
+			</if>
+			<if test="imgThumb01Group != null">
+				#{imgThumb01Group,jdbcType=VARCHAR},
+			</if>
+			<if test="imgThumb01File != null">
+				#{imgThumb01File,jdbcType=VARCHAR},
+			</if>
+			<if test="imgThumb02Group != null">
+				#{imgThumb02Group,jdbcType=VARCHAR},
+			</if>
+			<if test="imgThumb02File != null">
+				#{imgThumb02File,jdbcType=VARCHAR},
+			</if>
+			<if test="geoNum != null">
+				#{geoNum,jdbcType=BIGINT},
+			</if>
+			<if test="geoLevel != null">
+				#{geoLevel,jdbcType=SMALLINT},
+			</if>
+			<if test="iwcode != null">
+				#{iwcode,jdbcType=VARCHAR},
+			</if>
+			<if test="lng != null">
+				#{lng,jdbcType=REAL},
+			</if>
+			<if test="lat != null">
+				#{lat,jdbcType=REAL},
+			</if>
+			<if test="exPhotoTime != null">
+				#{exPhotoTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="exCountry != null">
+				#{exCountry,jdbcType=VARCHAR},
+			</if>
+			<if test="exProvince != null">
+				#{exProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="exCity != null">
+				#{exCity,jdbcType=VARCHAR},
+			</if>
+			<if test="exDistrict != null">
+				#{exDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="exAddress != null">
+				#{exAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="exif != null">
+				#{exif,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="praiseNum != null">
+				#{praiseNum,jdbcType=INTEGER},
+			</if>
+			<if test="commentNum != null">
+				#{commentNum,jdbcType=INTEGER},
+			</if>
+			<if test="delFlag != null">
+				#{delFlag,jdbcType=BIT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="dzn.teamjava.model.Photo">
+		update xx_photos
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="imgResGroup != null">
+				img_res_group = #{imgResGroup,jdbcType=VARCHAR},
+			</if>
+			<if test="imgResFile != null">
+				img_res_file = #{imgResFile,jdbcType=VARCHAR},
+			</if>
+			<if test="imgThumb00Group != null">
+				img_thumb_00_group = #{imgThumb00Group,jdbcType=VARCHAR},
+			</if>
+			<if test="imgThumb00File != null">
+				img_thumb_00_file = #{imgThumb00File,jdbcType=VARCHAR},
+			</if>
+			<if test="imgThumb01Group != null">
+				img_thumb_01_group = #{imgThumb01Group,jdbcType=VARCHAR},
+			</if>
+			<if test="imgThumb01File != null">
+				img_thumb_01_file = #{imgThumb01File,jdbcType=VARCHAR},
+			</if>
+			<if test="imgThumb02Group != null">
+				img_thumb_02_group = #{imgThumb02Group,jdbcType=VARCHAR},
+			</if>
+			<if test="imgThumb02File != null">
+				img_thumb_02_file = #{imgThumb02File,jdbcType=VARCHAR},
+			</if>
+			<if test="geoNum != null">
+				geo_num = #{geoNum,jdbcType=BIGINT},
+			</if>
+			<if test="geoLevel != null">
+				geo_level = #{geoLevel,jdbcType=SMALLINT},
+			</if>
+			<if test="iwcode != null">
+				iwcode = #{iwcode,jdbcType=VARCHAR},
+			</if>
+			<if test="lng != null">
+				lng = #{lng,jdbcType=REAL},
+			</if>
+			<if test="lat != null">
+				lat = #{lat,jdbcType=REAL},
+			</if>
+			<if test="exPhotoTime != null">
+				ex_photo_time = #{exPhotoTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="exCountry != null">
+				ex_country = #{exCountry,jdbcType=VARCHAR},
+			</if>
+			<if test="exProvince != null">
+				ex_province = #{exProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="exCity != null">
+				ex_city = #{exCity,jdbcType=VARCHAR},
+			</if>
+			<if test="exDistrict != null">
+				ex_district = #{exDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="exAddress != null">
+				ex_address = #{exAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="exif != null">
+				exif = #{exif,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="praiseNum != null">
+				praise_num = #{praiseNum,jdbcType=INTEGER},
+			</if>
+			<if test="commentNum != null">
+				comment_num = #{commentNum,jdbcType=INTEGER},
+			</if>
+			<if test="delFlag != null">
+				del_flag = #{delFlag,jdbcType=BIT},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where photo_id = #{photoId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="dzn.teamjava.model.Photo">
+		update xx_photos
+		set user_id = #{userId,jdbcType=BIGINT},
+		img_res_group = #{imgResGroup,jdbcType=VARCHAR},
+		img_res_file = #{imgResFile,jdbcType=VARCHAR},
+		img_thumb_00_group = #{imgThumb00Group,jdbcType=VARCHAR},
+		img_thumb_00_file = #{imgThumb00File,jdbcType=VARCHAR},
+		img_thumb_01_group = #{imgThumb01Group,jdbcType=VARCHAR},
+		img_thumb_01_file = #{imgThumb01File,jdbcType=VARCHAR},
+		img_thumb_02_group = #{imgThumb02Group,jdbcType=VARCHAR},
+		img_thumb_02_file = #{imgThumb02File,jdbcType=VARCHAR},
+		geo_num = #{geoNum,jdbcType=BIGINT},
+		geo_level = #{geoLevel,jdbcType=SMALLINT},
+		iwcode = #{iwcode,jdbcType=VARCHAR},
+		lng = #{lng,jdbcType=REAL},
+		lat = #{lat,jdbcType=REAL},
+		ex_photo_time = #{exPhotoTime,jdbcType=TIMESTAMP},
+		ex_country = #{exCountry,jdbcType=VARCHAR},
+		ex_province = #{exProvince,jdbcType=VARCHAR},
+		ex_city = #{exCity,jdbcType=VARCHAR},
+		ex_district = #{exDistrict,jdbcType=VARCHAR},
+		ex_address = #{exAddress,jdbcType=VARCHAR},
+		exif = #{exif,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR},
+		praise_num = #{praiseNum,jdbcType=INTEGER},
+		comment_num = #{commentNum,jdbcType=INTEGER},
+		del_flag = #{delFlag,jdbcType=BIT},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where photo_id = #{photoId,jdbcType=BIGINT}
+	</update>
+	
+	<!-- 检索出照片，关联其分享和标签 -->
+	<select id="checkoutPhotos" parameterType="map" resultMap="BaseResultMap2" >
+	   select
+	       p.*,
+	       tp.xx_tag_id as id,
+	       sp.xx_share_id as id
+	    from (select * from xx_photos limit #{offset},#{limit}) p
+	       left join xx_tag_photos tp on p.photo_id = tp.photo_id 
+	       left join xx_share_photos sp on p.photo_id = sp.photo_id 
+	</select>
+	<!-- 照片count -->
+    <select id="photoCount" resultType="long" >
+       select count(*) from xx_photos
+    </select>
+	
+</mapper>

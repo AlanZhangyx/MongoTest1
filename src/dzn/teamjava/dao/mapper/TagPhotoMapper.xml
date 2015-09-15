@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dzn.teamjava.dao.TagPhotoMapper" >
+  <resultMap id="BaseResultMap" type="dzn.teamjava.model.TagPhoto" >
+    <result column="photo_id" property="photoId" jdbcType="BIGINT" />
+    <result column="xx_tag_id" property="xxTagId" jdbcType="BIGINT" />
+  </resultMap>
+  <insert id="insert" parameterType="dzn.teamjava.model.TagPhoto" >
+    insert into xx_tag_photos (photo_id, xx_tag_id)
+    values (#{photoId,jdbcType=BIGINT}, #{xxTagId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="dzn.teamjava.model.TagPhoto" >
+    insert into xx_tag_photos
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="photoId != null" >
+        photo_id,
+      </if>
+      <if test="xxTagId != null" >
+        xx_tag_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="photoId != null" >
+        #{photoId,jdbcType=BIGINT},
+      </if>
+      <if test="xxTagId != null" >
+        #{xxTagId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

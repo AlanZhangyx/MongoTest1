@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 使用这个文件构建你的项目相关model,Mapper.xml,Mapper.java -->
+    <!-- maven goals:mybatis-generator:generate -->
+    <!-- location和src写实际需要的磁盘路径 -->
+
+    <!-- 数据库驱动 -->
+    <classPathEntry location="C:\Users\dznzyx\.m2\repository\mysql\mysql-connector-java\5.1.9\mysql-connector-java-5.1.9.jar"/>
+    
+    <context id="MySql" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!-- 给表/字段名加上反单引号，因为有时候表名为两个单词中间一个空格 -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        
+        <!-- 自动生成的注释无用，不要 是否去除自动生成的注释 true：是 ： false:否 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        
+        <!-- 数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://iwheredb.mysql.rds.aliyuncs.com:3306/thz" userId="user_thz" password="gt_702123_gt_2015"></jdbcConnection>
+        
+        <!-- 是否强制DECIMAL和NUMERIC类型的字段转换为Java类型的java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        
+        <!-- 生成模型的包名和位置,targetProject使用的是绝对路径 -->
+        <javaModelGenerator targetPackage="dzn.teamjava.model" targetProject="F:\Workspaces\Eclipse4.4WS1\DBCheckout\src\main\java">
+            <!-- 如果true，MBG会根据catalog和schema来生成子包。如果false就会直接用targetPackage属性。默认为false -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 数据库查询结果trim -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        
+        <!-- 生成映射文件的包名和位置 -->
+        <sqlMapGenerator targetPackage="dzn.teamjava.dao.mapper" targetProject="F:\Workspaces\Eclipse4.4WS1\DBCheckout\src\main\java">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        
+        <!-- 生成DAO的包名和位置,XMLMAPPER所有的方法都在XML中，接口调用依赖XML文件 -->
+        <javaClientGenerator targetPackage="dzn.teamjava.dao" implementationPackage="dzn.teamjava.dao.impl" type="XMLMAPPER" targetProject="F:\Workspaces\Eclipse4.4WS1\DBCheckout\src\main\java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        
+        <!-- 要生成哪些表 全部为tableName="%" -->
+        <!-- enableXXX:XXX代表多种SQL方法，该属性用来指定是否生成对应的XXX语句 -->
+        <table tableName="xx_photos" domainObjectName="Photo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="xx_comments" domainObjectName="Comment" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="xx_photos_statistics" domainObjectName="PhotoStatistic" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="xx_share" domainObjectName="Share" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="xx_share_photos" domainObjectName="SharePhoto" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="xx_tag" domainObjectName="Tag" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="xx_tag_photos" domainObjectName="TagPhoto" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+</generatorConfiguration>

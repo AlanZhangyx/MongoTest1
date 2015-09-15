@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dzn.teamjava.dao.ShareMapper" >
+  <resultMap id="BaseResultMap" type="dzn.teamjava.model.Share" >
+    <id column="xx_share_id" property="xxShareId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="center_lng" property="centerLng" jdbcType="DOUBLE" />
+    <result column="center_lat" property="centerLat" jdbcType="DOUBLE" />
+    <result column="zoom" property="zoom" jdbcType="SMALLINT" />
+    <result column="check_code" property="checkCode" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    xx_share_id, user_id, center_lng, center_lat, zoom, check_code, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from xx_share
+    where xx_share_id = #{xxShareId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from xx_share
+    where xx_share_id = #{xxShareId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="dzn.teamjava.model.Share" >
+    insert into xx_share (xx_share_id, user_id, center_lng, 
+      center_lat, zoom, check_code, 
+      create_time)
+    values (#{xxShareId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{centerLng,jdbcType=DOUBLE}, 
+      #{centerLat,jdbcType=DOUBLE}, #{zoom,jdbcType=SMALLINT}, #{checkCode,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="dzn.teamjava.model.Share" >
+    insert into xx_share
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="xxShareId != null" >
+        xx_share_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="centerLng != null" >
+        center_lng,
+      </if>
+      <if test="centerLat != null" >
+        center_lat,
+      </if>
+      <if test="zoom != null" >
+        zoom,
+      </if>
+      <if test="checkCode != null" >
+        check_code,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="xxShareId != null" >
+        #{xxShareId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="centerLng != null" >
+        #{centerLng,jdbcType=DOUBLE},
+      </if>
+      <if test="centerLat != null" >
+        #{centerLat,jdbcType=DOUBLE},
+      </if>
+      <if test="zoom != null" >
+        #{zoom,jdbcType=SMALLINT},
+      </if>
+      <if test="checkCode != null" >
+        #{checkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="dzn.teamjava.model.Share" >
+    update xx_share
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="centerLng != null" >
+        center_lng = #{centerLng,jdbcType=DOUBLE},
+      </if>
+      <if test="centerLat != null" >
+        center_lat = #{centerLat,jdbcType=DOUBLE},
+      </if>
+      <if test="zoom != null" >
+        zoom = #{zoom,jdbcType=SMALLINT},
+      </if>
+      <if test="checkCode != null" >
+        check_code = #{checkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where xx_share_id = #{xxShareId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="dzn.teamjava.model.Share" >
+    update xx_share
+    set user_id = #{userId,jdbcType=BIGINT},
+      center_lng = #{centerLng,jdbcType=DOUBLE},
+      center_lat = #{centerLat,jdbcType=DOUBLE},
+      zoom = #{zoom,jdbcType=SMALLINT},
+      check_code = #{checkCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where xx_share_id = #{xxShareId,jdbcType=BIGINT}
+  </update>
+</mapper>
