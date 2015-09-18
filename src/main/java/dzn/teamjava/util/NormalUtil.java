@@ -3,6 +3,7 @@ package dzn.teamjava.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class NormalUtil {
     
     public static Date randomDate(String beginDate, String endDate) {  
