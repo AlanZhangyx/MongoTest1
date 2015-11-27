@@ -38,7 +38,7 @@ import dzn.teamjava.util.NormalUtil;
 public class Launcher {
     
     //mongodb://[username:password@]host1[:port1][,host2[:port2],…[,hostN[:portN]]][/[database][?options]]
-    private static String sURI = String.format("mongodb://%s:%s@%s:%d/%s", "user_test", "12345678", "127.0.0.1", 27017, "db_thz"); 
+    private static String sURI = String.format("mongodb://%s:%s@%s:%d/%s", "user_zyx", "12345678", "127.0.0.1", 27017, "db_thz"); 
     private static MongoClientURI uri=null;
     private static MongoClient mongoClient = null;
     private static MongoDatabase db=null;
@@ -49,6 +49,23 @@ public class Launcher {
         mongoClient = new MongoClient(uri); 
         db = mongoClient.getDatabase("db_thz");
     }
+    
+    @Test
+    public void testLink() throws IOException{
+        MongoCollection<Document> collection=db.getCollection("xx_photos");
+        
+        System.err.println("开始时间："+System.currentTimeMillis());
+        FindIterable<Document> itera=collection.find();
+        System.err.println("结束时间："+System.currentTimeMillis());
+        
+        MongoCursor<Document> mc=itera.iterator();
+        Document doc=null;
+        while (mc.hasNext()) {
+            doc= mc.tryNext();
+            System.out.println(doc.get("username"));
+        }
+    }
+    
     
     
     @Test
@@ -178,10 +195,10 @@ public class Launcher {
     
     
     public static void main(String[] args) throws Exception {
-        MongoCollection<Document> collection=db.getCollection("xx_photos");
+        //MongoCollection<Document> collection=db.getCollection("xx_photos");
         
         //关闭资源
-        mongoClient.close();
+        //mongoClient.close();
     }
     
     @SuppressWarnings("unchecked")
